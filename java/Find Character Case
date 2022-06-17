@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+public class Main {
+
+public static void main(String[] args) {
+    // Write your code here
+    Scanner s = new Scanner(System.in);
+    String str=s.next();
+    char ch=str.charAt(0);
+    int v= ch;
+    if (v>=97 && v<=122)
+        System.out.println(0);
+    else if(v>=65 && v<=90)
+        System.out.println(1);
+    else
+        System.out.println(-1);
+}
+}
