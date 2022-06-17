@@ -1,0 +1,75 @@
+/*Given a Linked List, which has nodes in alternating ascending and descending orders. Sort the list efficiently and space complexity should be O(1).
+You just need to return the head of sorted linked list, don't print the elements.
+Input format :
+Line 1 : Linked list elements of length L (separated by space and terminated by -1)
+Line 2 : Integer n
+Output format :
+Updated list elements (separated by space)
+Sample Input 1 :
+10 40 53 30 67 12 89 -1
+Sample Output 1 :
+10 12 30 40 53 67 89*/
+
+public class Solution {
+public static LinkedListNode<Integer> sort(LinkedListNode<Integer> head) {
+//Your code goes here
+LinkedListNode<Integer> head1=head;
+LinkedListNode<Integer> head2=head.next;
+LinkedListNode<Integer> t1=head1;
+LinkedListNode<Integer> t2=head2;
+//separating the increasing and decreasing lists
+while(t1.next!=null && t2.next!=null) {
+t1.next=t2.next;
+t1=t1.next;
+t2.next=t1.next;
+t2=t2.next;
+}
+t1.next=null;
+//reversing the second/decreasing list
+LinkedListNode<Integer> p=null;
+LinkedListNode<Integer> c=head2;
+LinkedListNode<Integer> n=head2.next;
+while(c!=null) {
+c.next=p;
+p=c;
+c=n;
+if(n!=null) {
+n=n.next;
+}}
+head2=p;
+//merger the two sorted lists
+LinkedListNode<Integer> p1=head1;
+LinkedListNode<Integer> p2=head2;
+LinkedListNode<Integer> temp=null;
+if(p1.data<p2.data) {
+temp=p1;
+p1=p1.next;
+}
+else {
+temp=p2;
+p2=p2.next;
+}
+LinkedListNode<Integer> newhead=temp;
+while(p1!=null && p2!=null) {
+if(p1.data>=p2.data) {
+temp.next=p2;
+temp=temp.next;
+p2=p2.next;
+}
+else {
+temp.next=p1;
+temp=temp.next;
+p1=p1.next;
+}}
+while(p1!=null) {
+temp.next=p1;
+temp=temp.next;
+p1=p1.next;
+}
+while(p2!=null) {
+temp.next=p2;
+temp=temp.next;
+p2=p2.next;
+}
+return newhead;
+}}
